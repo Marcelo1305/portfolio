@@ -15,11 +15,11 @@
     $(".navbar-nav a").on('click', function (event) {
         if (this.hash !== "") {
             event.preventDefault();
-            
+
             $('html, body').animate({
                 scrollTop: $(this.hash).offset().top - 45
             }, 1500, 'easeInOutExpo');
-            
+
             if ($(this).parents('.navbar-nav').length) {
                 $('.navbar-nav .active').removeClass('active');
                 $(this).closest('a').addClass('active');
@@ -74,7 +74,7 @@
         $('.progress .progress-bar').each(function () {
             $(this).css("width", $(this).attr("aria-valuenow") + '%');
         });
-    }, {offset: '80%'});
+    }, { offset: '80%' });
 
 
     // Portfolio isotope and filter
@@ -86,10 +86,10 @@
         $("#portfolio-flters li").removeClass('active');
         $(this).addClass('active');
 
-        portfolioIsotope.isotope({filter: $(this).data('filter')});
+        portfolioIsotope.isotope({ filter: $(this).data('filter') });
     });
-    
-    
+
+
     // Back to top button
     $(window).scroll(function () {
         if ($(this).scrollTop() > 200) {
@@ -99,7 +99,7 @@
         }
     });
     $('.back-to-top').click(function () {
-        $('html, body').animate({scrollTop: 0}, 1500, 'easeInOutExpo');
+        $('html, body').animate({ scrollTop: 0 }, 1500, 'easeInOutExpo');
         return false;
     });
 
@@ -112,6 +112,20 @@
         loop: true,
         items: 1
     });
-    
+
+    // Calcular tempo de esperiencia
+    $('document').ready(function () {
+        var startDate = new Date("2021-01-01");
+        var today = new Date();
+        var experienceYears = today.getFullYear() - startDate.getFullYear();
+        var experienceMonths = today.getMonth() - startDate.getMonth();
+
+        if (experienceMonths < 0) {
+            experienceYears--;
+            experienceMonths += 12;
+        }
+
+        $('.experiencie').text(experienceYears + ' anos' + (experienceMonths > 0 ? ' e ' + experienceMonths + ' mes' + (experienceMonths > 1 ? 'es' : '') : ''));
+    });
 })(jQuery);
 
